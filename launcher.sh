@@ -14,8 +14,8 @@ call-next-plugin() {
 if [ -n "$LAUNCHER_UPDATE" ]; then
    echo "Pulling latest launcher script"
    cd $DIR
-   git branch -u origin/master master
-	git pull
+   sudo git branch -u origin/master master
+	sudo git pull
    if [ -n "$LAUNCHER_GITREF" ]; then
       git checkout $LAUNCHER_GITREF
    fi
