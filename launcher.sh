@@ -9,6 +9,18 @@ call-next-plugin() {
   source $PLUGIN_DIR/$1/${1:4}.sh
 }
 
+
+if [ -n "$LAUNCHER_UPDATE" ]; then
+   echo "Pulling latest launcher script"
+   cd $DIR
+   git branch -u origin/master master
+	git pull
+   if [ -n "$LAUNCHER_GITREF" ]; then
+      git checkout $LAUNCHER_GITREF
+   fi
+   cd -
+fi
+
 export CONFIG_TYPE="simple"
 export ENABLED_PLUGINS="envtoconf launcher"
 export RUNTIME_ARGUMENTS="$@"
