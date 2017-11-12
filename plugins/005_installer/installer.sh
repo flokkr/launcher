@@ -1,7 +1,7 @@
 #/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 for INSTALLER in $(env | grep INSTALLER_); do
+        cd /
 		  ID=$(id -u -n)
 		  KEY=$(echo $INSTALLER | awk -F '=' '{print $1}')
 		  COMPONENT=$(echo $KEY | awk -F '_' '{print tolower($2)}')
@@ -17,10 +17,10 @@ for INSTALLER in $(env | grep INSTALLER_); do
 		     wget $URL -O $DESTFILE
 	          fi
 		  tar xzf $DESTFILE -C /opt/unpack
-                  sudo mv /opt/unpack/* /opt/$COMPONENT
-                  sudo chown $ID /opt/$COMPONENT
-                  rm -rf /opt/unpack
+        sudo mv /opt/unpack/* /opt/$COMPONENT
+        sudo chown $ID /opt/$COMPONENT
+        rm -rf /opt/unpack
+        cd -
 done
-
 
 call-next-plugin "$@"
