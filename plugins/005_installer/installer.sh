@@ -1,7 +1,8 @@
 #/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 for INSTALLER in $(env | grep INSTALLER_); do
-      cd /
+		  sudo apk add --update rsync
+        cd /
 		  ID=$(id -u -n)
 		  KEY=$(echo $INSTALLER | awk -F '=' '{print $1}')
 		  COMPONENT=$(echo $KEY | awk -F '_' '{print tolower($2)}')
@@ -17,7 +18,7 @@ for INSTALLER in $(env | grep INSTALLER_); do
 		     wget $URL -O $DESTFILE
       fi
 		  tar xzf $DESTFILE -C /opt/unpack
-        REL_CONF=$(relpath --relative-to "$COMPONENT_DIR" "$CONF_DIR")
+        REL_CONF=$(realpath --relative-to "$COMPONENT_DIR" "$CONF_DIR")
         SW_DIR="/opt/unpack/$(ls -1 /opt/unpack | head )"
         sudo rsync -avh --delete --exclude $REL_CONF $SW_DIR/ $COMPONENT_DIR
         sudo chown $ID /opt/$COMPONENT
