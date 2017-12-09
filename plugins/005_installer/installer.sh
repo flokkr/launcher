@@ -1,12 +1,12 @@
 #/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 for INSTALLER in $(env | grep INSTALLER_); do
-        cd /
+      cd /
 		  ID=$(id -u -n)
 		  KEY=$(echo $INSTALLER | awk -F '=' '{print $1}')
 		  COMPONENT=$(echo $KEY | awk -F '_' '{print tolower($2)}')
 		  URL=$(echo $INSTALLER | awk -F '=' '{print $2}')
-		  sudo rm -rf /opt/$COMPONENT
+		  COMPONENT_DIR=/opt/$COMPONENT
 		  sudo rm -rf /opt/unpack
 		  sudo mkdir -p /opt/unpack
 		  sudo mkdir -p /opt/download
@@ -15,9 +15,11 @@ for INSTALLER in $(env | grep INSTALLER_); do
 		  DESTFILE=/opt/download/$COMPONENT.tar.gz
 		  if [ ! -f "$DESTFILE" ]; then
 		     wget $URL -O $DESTFILE
-	          fi
+      fi
 		  tar xzf $DESTFILE -C /opt/unpack
-        sudo mv /opt/unpack/* /opt/$COMPONENT
+        REL_CONF=$(relpath --relative-to "$COMPONENT_DIR" "$CONF_DIR")
+        SW_DIR="/opt/unpack/$(ls -1 /opt/unpack | head )"
+        sudo rsync -avh --delete --exclude $REL_CONF $SW_DIR/ $COMPONENT_DIR
         sudo chown $ID /opt/$COMPONENT
         rm -rf /opt/unpack
         cd -
