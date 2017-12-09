@@ -20,7 +20,7 @@ for INSTALLER in $(env | grep INSTALLER_); do
 		  tar xzf $DESTFILE -C /opt/unpack
         REL_CONF=$(realpath --relative-to "$COMPONENT_DIR" "$CONF_DIR")
         SW_DIR="/opt/unpack/$(ls -1 /opt/unpack | head )"
-        sudo rsync -avh --delete --exclude $REL_CONF $SW_DIR/ $COMPONENT_DIR
+        sudo rsync -ah --delete --exclude $REL_CONF $SW_DIR/ $COMPONENT_DIR
         sudo chown $ID /opt/$COMPONENT
         rm -rf /opt/unpack
         cd -
