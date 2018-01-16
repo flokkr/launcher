@@ -1,4 +1,4 @@
-i#/usr/bin/env bash
+#/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 for INSTALLER in $(env | grep INSTALLER_); do
 		  sudo apk add --update rsync
