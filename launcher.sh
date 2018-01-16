@@ -23,11 +23,7 @@ if [ -n "$LAUNCHER_UPDATE" ]; then
 fi
 
 export CONFIG_TYPE="simple"
-export ENABLED_PLUGINS="envtoconf launcher"
 export RUNTIME_ARGUMENTS="$@"
-for ENABLED_PLUGIN in $(echo $ENABLED_PLUGINS); do
-   declare -x ${ENABLED_PLUGIN^^}_ENABLED=true
-done
 echo ""
 export PLUGIN_DIR="$DIR/plugins"
 source $PLUGIN_DIR/002_permissionfix/permissionfix.sh $(ls -1 $PLUGIN_DIR | sort);
