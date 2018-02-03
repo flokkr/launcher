@@ -8,7 +8,7 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   BTRACE_DIR=$DIR/btrace
   #install btrace
   if [ ! -d $BTRACE_DIR ]; then
-     wget https://github.com/btraceio/btrace/releases/download/v1.3.9/btrace-bin-1.3.9.tgz -O /tmp/btrace.tgz
+     wget https://github.com/btraceio/btrace/releases/download/v1.3.10.2/btrace-bin-1.3.10.2.tgz -O /tmp/btrace.tgz
      mkdir -p $BTRACE_DIR
      cd $BTRACE_DIR
      tar zxf /tmp/btrace.tgz
