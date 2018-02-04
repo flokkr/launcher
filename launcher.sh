@@ -22,6 +22,9 @@ if [ -n "$LAUNCHER_UPDATE" ]; then
    cd -
 fi
 
+#For compatibility reason: remove the old btrace location
+sudo rm -rf /opt/launcher/plugins/020_btrace
+
 export CONFIG_TYPE="simple"
 export RUNTIME_ARGUMENTS="$@"
 echo ""

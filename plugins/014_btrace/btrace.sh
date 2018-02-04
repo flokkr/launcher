@@ -1,6 +1,6 @@
 #/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
+set -x
 
 if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SCRIPT_URL" ]; then
   plugin-is-active "BTRACE"
@@ -8,12 +8,10 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   BTRACE_DIR=/opt/btrace
   #install btrace
   if [ ! -d $BTRACE_DIR ]; then
-     #For compatibility reason: remove the old btrace location
-     sudo rm -rf /opt/launcher/plugins/020_btrace
 
-     cd $BTRACE_DIR
      wget https://github.com/btraceio/btrace/releases/download/v1.3.10.2/btrace-bin-1.3.10.2.tgz -O /tmp/btrace-latest.tgz
      mkdir -p $BTRACE_DIR
+     cd $BTRACE_DIR
      tar zxf /tmp/btrace-latest.tgz
      cd -
   fi
@@ -40,7 +38,7 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   fi
 
   export RUNTIME_ARGUMENTS="$RUNTIME_ARGUMENTS > /tmp/output.log"
-  AGENT_STRING="-javaagent:$BTRACE_DIR/build/btrace-agent.jar=$BTRACE_AGENT_ARG,unsafe=true,script=$BTRACE_SCRIPT,scriptOutputFile=/tmp/btrace.out"
+  AGENT_STRING="-javaagent:$BTRACE_DIR/build/btrace-agent.jar=unsafe=true,script=$BTRACE_SCRIPT,scriptOutputFile=/tmp/btrace.out"
   declare -x $BTRACE_OPTS_VAR="$AGENT_STRING $JAVA_OPTS"
   echo "Process is instrumented with setting $BTRACE_OPTS_VAR to $AGENT_STRING"
   echo "Standard output is replaced with btrace output"
