@@ -43,4 +43,4 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   echo "Standard output is replaced with btrace output"
 fi
 
-call-next-plugin "$@"
+all-next-plugin "$@"
