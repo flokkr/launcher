@@ -8,6 +8,9 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   BTRACE_DIR=/opt/btrace
   #install btrace
   if [ ! -d $BTRACE_DIR ]; then
+     #For compatibility reason: remove the old btrace location
+     sudo rm -rf /opt/launcher/plugins/020_btrace
+
      cd $BTRACE_DIR
      wget https://github.com/btraceio/btrace/releases/download/v1.3.10.2/btrace-bin-1.3.10.2.tgz -O /tmp/btrace-latest.tgz
      mkdir -p $BTRACE_DIR
