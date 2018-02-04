@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SCRIPT_URL" ]; then
   plugin-is-active "BTRACE"
 
-  BTRACE_DIR=$DIR/btrace
+  BTRACE_DIR=/opt/btrace
   #install btrace
   if [ ! -d $BTRACE_DIR ]; then
      wget https://github.com/btraceio/btrace/releases/download/v1.3.10.2/btrace-bin-1.3.10.2.tgz -O /tmp/btrace.tgz
@@ -28,7 +28,7 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   fi
 
   if [ "${BTRACE_SCRIPT:0:1}" != "/" ]; then
-     export BTRACE_SCRIPT="$DIR/btrace/$BTRACE_SCRIPT"
+     export BTRACE_SCRIPT="$BTRACE_DIR/$BTRACE_SCRIPT"
   fi
 
   if [ ! -f "$BTRACE_SCRIPT" ]; then
@@ -37,7 +37,7 @@ if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SC
   fi
 
   export RUNTIME_ARGUMENTS="$RUNTIME_ARGUMENTS > /tmp/output.log"
-  AGENT_STRING=-javaagent:"$DIR/btrace/build/btrace-agent.jar=$BTRACE_AGENT_ARG,unsafe=true,script=$BTRACE_SCRIPT,scriptOutputFile=/tmp/btrace.out"
+  AGENT_STRING=-javaagent:"$BTRACE_DIR/build/btrace-agent.jar=$BTRACE_AGENT_ARG,unsafe=true,script=$BTRACE_SCRIPT,scriptOutputFile=/tmp/btrace.out"
   declare -x $BTRACE_OPTS_VAR="$AGENT_STRING $JAVA_OPTS"
   echo "Process is instrumented with setting $BTRACE_OPTS_VAR to $AGENT_STRING"
   echo "Standard output is replaced with btrace output"
