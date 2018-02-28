@@ -2,7 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
-if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "BTRACE_SCRIPT_URL" ]; then
+if [ "true" == "$BTRACE_ENABLED" ] || [ -n "$BTRACE_SCRIPT" ] || [ -n "$BTRACE_SCRIPT_URL" ]; then
   plugin-is-active "BTRACE"
 
   BTRACE_DIR=/opt/btrace
