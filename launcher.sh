@@ -1,6 +1,10 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+if [ ! -z "$FLOKKR_DEBUG" ]; then
+  set -x
+fi
+
 echo "Flokkr launcher script $(git --work-tree=$DIR describe --tags)"
 plugin-is-active() {
   echo "===== Plugin is activated $1 ====="
