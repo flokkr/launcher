@@ -15,15 +15,15 @@ call-next-plugin() {
 }
 
 
-if [ -n "$LAUNCHER_UPDATE" ]; then
+if [ "$LAUNCHER_UPDATE" ]; then
   echo "Pulling latest launcher script"
   cd $DIR
   sudo git branch -u origin/master master
-	sudo git pull
-   if [ -n "$LAUNCHER_GITREF" ]; then
+  sudo git pull
+  if [ -n "$LAUNCHER_GITREF" ]; then
       sudo git checkout $LAUNCHER_GITREF
-   fi
-   cd -
+  fi
+  cd -
 fi
 
 #For compatibility reason: remove the old btrace location
