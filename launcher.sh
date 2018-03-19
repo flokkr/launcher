@@ -5,7 +5,7 @@ if [ ! -z "$FLOKKR_DEBUG" ]; then
   set -x
 fi
 
-echo "Flokkr launcher script $(git --work-tree=$DIR describe --tags)"
+echo "Flokkr launcher script $(git --work-tree=$DIR --git-dir=$DIR/.git describe --tags)"
 plugin-is-active() {
   echo "===== Plugin is activated $1 ====="
 }
