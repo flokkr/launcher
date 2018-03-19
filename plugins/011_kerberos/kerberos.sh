@@ -23,7 +23,7 @@ if [ -n "$KEYSTORE_DOWNLOADED" ]; then
 fi
 
 if [ -n "$KERBEROS_ENABLED" ]; then
-   cp $DIR/krb5.conf /etc/krb5.conf
+   sudo cp $DIR/krb5.conf /etc/krb5.conf
 fi
 
 call-next-plugin "$@"
