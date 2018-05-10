@@ -19,10 +19,8 @@ if [ "$LAUNCHER_UPDATE" ]; then
   echo "Pulling latest launcher script"
   cd $DIR
   sudo git branch -u origin/master master
-  sudo git pull
-  if [ -n "$LAUNCHER_GITREF" ]; then
-      sudo git checkout $LAUNCHER_GITREF
-  fi
+  sudo git fetch origin
+  sudo git checkout ${LAUNCHER_GITREF:-origin/master}
   cd -
 fi
 
