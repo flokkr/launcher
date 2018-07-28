@@ -21,3 +21,4 @@ while [ $COUNTER -gt 0 ]; do
      let SLEEP=SLEEP+10
    fi
 done
+exit 0
