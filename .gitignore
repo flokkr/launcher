@@ -7,6 +7,6 @@ group_vars
 .python-version
 configuration.egg-info/
 *.class
-
+plugins/710_kubernetes/kubernetes-launcher
 plugins/020_btrace/btrace
 plugins/020_btrace/test/Start.class
