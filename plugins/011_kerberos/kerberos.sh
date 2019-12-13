@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 KEYTAB_DIR=${KEYTAB_DIR:-$CONF_DIR}
 if [ ! -d $KEYTAB_DIR ]; then
    sudo mkdir -p "$KEYTAB_DIR"
-   sudo chown 777 "$KEYTAB_DIR"
+   sudo chmod 777 "$KEYTAB_DIR"
 fi
 KERBEROS_SERVER=${KERBEROS_SERVER:-krb5}
 ISSUER_SERVER=${ISSUER_SERVER:-$KERBEROS_SERVER\:8081}
