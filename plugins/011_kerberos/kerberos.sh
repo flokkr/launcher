@@ -9,6 +9,24 @@ fi
 KERBEROS_SERVER=${KERBEROS_SERVER:-krb5}
 ISSUER_SERVER=${ISSUER_SERVER:-$KERBEROS_SERVER\:8081}
 export HOST_NAME=`hostname -f`
+
+if [ -n "$KERBEROS_ENABLED" ]; then
+  while true
+    do
+      set +e
+      STATUS=$(curl -s -o /dev/null -w '%{http_code}' http://"$ISSUER_SERVER"/keytab/test/test)
+      set -e
+      if [ "$STATUS" -eq 200 ]; then
+        echo "Got 200, KDC service ready!!"
+        break
+      else
+        echo "Got $STATUS :( KDC service not ready yet..."
+      fi
+      sleep 5
+    done
+fi
+
+
 for NAME in ${KERBEROS_KEYTABS}; do
    echo "Download $NAME/$HOSTNAME@... keytab file"
    wget http://$ISSUER_SERVER/keytab/$HOST_NAME/$NAME -O $KEYTAB_DIR/$NAME.keytab
