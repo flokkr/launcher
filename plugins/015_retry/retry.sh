@@ -1,6 +1,10 @@
 #/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-RETRY_NUMBER=${RETRY_NUMBER:-10}
+RETRY_NUMBER=${RETRY_NUMBER:-1}
+if [ $RETRY_NUMBER -eq 1 ]; then
+   call-next-plugin "$@"
+   exit 0
+fi
 SLEEP=10
 COUNTER=$RETRY_NUMBER
 RETRY_NORMAL_RUN_DURATION=${RETRY_NORMAL_RUN_DURATION:-60}
