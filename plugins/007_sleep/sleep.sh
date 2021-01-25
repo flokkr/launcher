@@ -6,3 +6,7 @@ if [ -n "$SLEEP_SECONDS" ]; then
 fi
 
 call-next-plugin "$@"
+
+if [ -n "$SLEEP_AFTER_SECONDS" ]; then
+   sleep $SLEEP_AFTER_SECONDS
+fi
