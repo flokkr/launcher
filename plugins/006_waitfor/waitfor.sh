@@ -13,12 +13,13 @@ if [ ! -z "$WAITFOR" ]; then
       if [ $# -gt 0 ] ; then
         call-next-plugin "$@"
       fi
-      exit 0
+      return
     fi
     sleep 1
   done
   echo "Operation timed out" >&2
-  exit 1
+  EXIT_CODE=-1
+  return
 else
   call-next-plugin "$@"
 fi

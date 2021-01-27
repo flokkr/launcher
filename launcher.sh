@@ -32,3 +32,4 @@ export RUNTIME_ARGUMENTS="$@"
 echo ""
 export PLUGIN_DIR="$DIR/plugins"
 source $PLUGIN_DIR/002_permissionfix/permissionfix.sh $(ls -1 $PLUGIN_DIR | sort);
+exit $EXIT_CODE
